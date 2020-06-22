@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Insert EV INFO</title>
+	</head>
+	<body>
+		{% if eletronicvehicle %}
+		Insert Electronic Vehicle Information Here<br/>
+	  <p>Hello {{ eletronicvehicle }}</p>
+		<!--#name, manufacturer, year, battery size (Kwh), WLTP range(Km), cost, power (Kw).-->
+		<form method="post" action="/add">
+			Email:<input type="Email" id="email_address" name="email_address" value=" {{eletronicvehicle.email_address}}" disabled />
+			<br />
+			Name:<input type="text" id="name" name="name" value=" {{eletronicvehicle.name}}"/>
+			<br />
+			Manufacturer:<input type="text" id="manufacturer" name="manufacturer" value=" {{eletronicvehicle.manufacturer}}"/>
+			<br />
+			Battery Size (Kwh):<input type="number" id="btrysize" name="btrysize" value=" {{eletronicvehicle.btrysize}}" min="1" max="10"/>
+			<br />
+			WLTP Range (Km):<input type="number" id="wltprng" name="wltprng" value=" {{eletronicvehicle.wltprng}}" min="1" max="10"/>
+			<br />
+			Cost:<input type="number" name="cost" id="cost" value=" {{eletronicvehicle.cost}}" min="1" max="10"/>
+			<br />
+			Power:<input type="number" name="power" id="power" value=" {{eletronicvehicle.power}}" min="1" max="10"/>
+			<br />
+			Year:<input type="number" name="year" id="year" value=" {{eletronicvehicle.year}}"/>
+			<br />
+			<input type="submit" value="Add" name="button"/>
+		</form>
+		<form method="post" action="/add">
+			<input type="submit" value="Cancel" name="button"/>
+		</form>
+		{% else %}
+	  <p>Hello guest welcome to the application</p>
+		<p>You Can Not Access This Unless You LogIn</p>
+	  {% endif %}
+	  <p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
+	</body>
+</html>

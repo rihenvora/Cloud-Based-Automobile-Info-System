@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Insert EV INFO</title>
+	</head>
+	<body>
+		{{showList}}
+		{% if eletronicvehicle %}
+		<!--#name, manufacturer, year, battery size (Kwh), WLTP range(Km), cost, power (Kw).-->
+			{% for ev in showList %}
+				<form method="post" action="/edit">
+					<input type="hidden" id="edit_key" name="edit_key"  value="{{ev.key.id()}}"   />
+					Email:<input type="Email" id="email_address" name="email_address" value="{{ev.email_address}}" disabled  />
+					<br />
+					<br />
+					Name:<input type="text" id="name" name="name" value="{{ev.name}}" required />
+					<br />
+					<br />
+					Manufacturer:<input type="text" id="manufacturer" name="manufacturer" value="{{ev.manufacturer}}" required />
+					<br />
+					<br />
+					Battery Size (Kwh):<input type="number" id="btrysize" name="btrysize" value="{{ev.btrysize}}"  min="1" max="10" required />
+					<br />
+					<br />
+					WLTP Range (Km):<input type="number" id="wltprng" name="wltprng" value="{{ev.wltprng}}"  min="1" max="10" required />
+					<br />
+					<br />
+					Cost:<input type="number" name="cost" id="cost" value="{{ev.cost}}"  min="1" max="10" required />
+					<br />
+					<br />
+					Power:<input type="number" name="power" id="power" value="{{ev.power}}" min="1" max="10" required />
+					<br />
+					<br />
+					Year:<input type="number" name="year" id="year" value="{{ev.year}}" required />
+					<br />
+					<br />
+					<input type="submit" value="Update" name="button"/>
+				</form>
+				<form method="post" action="/edit">
+					<input type="submit" value="Cancel" name="button"/>
+				</form>
+			{% endfor %}
+			<hr />
+		{% else %}
+ 	  	<p>Hello guest welcome to the application</p>
+ 			<p>You Can Not Access This Unless You LogIn</p>
+ 	  {% endif %}
+ 	  <p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Index</title>
+</head>
+<body>
+  <hr />
+   <table border = "1"><thead><tr><th>ID</th><th>Email ID</th><th>Name</th><th>Manufacturer</th><th>Year</th><th>Bettery Size</th><th>Power</th><th>WLTP Range</th><th>Cost</th><th>Average Rating</th></tr></thead><tbody>
+     {% for ev in showList %}
+      <tr style="text-align:center;"><td>{{loop.index}}</td>
+        <td>{{ev.email_address}}</td><td><a href='/Details?key={{ev.key.id()}}'>{{ev.name}}</a></td><td>{{ev.manufacturer}}</td><td>{{ev.year}}</td>
+         <td>{{ev.btrysize}}</td>
+        <td>{{ev.power}}</td>
+      <td>{{ev.wltprng}}</td>
+      <td>{{ev.cost}}</td>
+      <td>{{Avg}}</td>
+       </tr>
+    {% endfor %}
+   </tbody></table>
+   <hr />
+   {% if eletronicvehicle %}
+   <p>Hello {{ eletronicvehicle }}</p>
+   <p> {{welcome}}</p>
+   To Insert EV information <a href="/add" >Insert EV</a>
+   <form method="post" action="/review">
+     <p style="color:red">Please Enter Review Between 1-1000 Wrods also Rating Should be Between 1-10 as 1 Least and 10 Most</p>
+     <input type="hidden" id="hiddenid" name="hiddenid" value="{{list1}}"/>
+     Review:<input type="text" id="review" name="review" placeholder="Review " maxlength="1000"/>
+     <br />
+     <br />
+     Rating:<input type="number" id="rating" name="rating" placeholder="Rating" min="1" max="10"/>
+     <br />
+     <br />
+     <input type="submit" value="Save" name="button"/>
+    </form>
+    <form method="post" action="/review">
+      <input type="submit" value="Cancel" name="button"/>
+     </form>
+    {%if message != ''%}
+      <p style="color:red;">{{message}}</p>
+    {%endif%}
+   {% else %}
+   <p>Hello guest welcome to the application</p>
+   {% endif %}
+   <p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
+   <p>you can Search <a href='/search'>here</a></p>
+   <p>back To <a href='/'>Home</a></p>
+   <table border = "1"><thead><tr><th>ID</th><th>Review From</th><th>Review</th><th>Rating</th></tr></thead><tbody>
+   {% for r in Review %}
+   <tr>
+    <td>{{loop.index}}</td>
+    <td>{{r.email_address}}</td>
+    <td>{{r.review}}</td>
+    <td> {{r.rating}}</td>
+  </tr>
+   {% endfor %}
+   </tbody></table>
+</body>
+</html>

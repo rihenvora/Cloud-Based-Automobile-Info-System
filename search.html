@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Insert EV INFO</title>
+	</head>
+	<body>
+		<!--#name, manufacturer, year, battery size (Kwh), WLTP range(Km), cost, power (Kw).-->
+		<form method="post" action="/search">
+			Email:<input type="Email" id="email_address" name="email_address"  />
+			<br />
+			<br />
+			Name:<input type="text" id="name" name="name"/>
+			<br />
+			<br />
+			Manufacturer:<input type="text" id="manufacturer" name="manufacturer"/>
+			<br />
+			<br />
+			Battery Size (Kwh):<input type="number" id="btrysize" name="btrysize" min="1" max="10" placeholder="From"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" id="btrysize1" name="btrysize1" min="1" max="10" placeholder="To"/>
+			<br />
+			<br />
+			WLTP Range (Km):<input type="number" id="wltprng" name="wltprng" min="1" max="10" placeholder="From"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" id="wltprng1" name="wltprng1" min="1" max="10" placeholder="To"/>
+			<br />
+			<br />
+			Cost:<input type="number" name="cost" id="cost" min="1" max="10" placeholder="From"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="cost1" id="cost1" min="1" max="10" placeholder="To"/>
+			<br />
+			<br />
+			Power:<input type="number" name="power" id="power"  min="1" max="10" placeholder="From"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="power1" id="power1"  min="1" max="10" placeholder="To"/>
+			<br />
+			<br />
+			Year:<input type="number" name="year" id="year" placeholder="From" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="year1" id="year1" placeholder="To" />
+			<br />
+			<br />
+			<input type="submit" value="Search" name="button"/>
+		</form>
+
+		<hr />
+	   <table border = "1"><thead><tr><th>ID</th><th>Email ID</th><th>Name</th><th>Manufacturer</th><th>Year</th><th>Bettery Size</th><th>Power</th><th>WLTP Range</th><th>Cost</th></tr></thead><tbody>
+			 {{list1}}
+			 {% if showList  %}
+			 		{% for ev in showList %}
+						<tr><td>{{loop.index}}</td><td>{{ev.email_address}}</td><td><a href='/Details?key={{ev.key.id()}}'>{{ev.name}}</a></td><td>{{ev.manufacturer}}</td><td>{{ev.year}}</td><td>{{ev.btrysize}}</td><td>{{ev.power}}</td><td>{{ev.wltprng}}</td><td>{{ev.cost}}</td></tr>
+					{% endfor %}
+				{% else %}
+	       		<tr><td colspan="9" style="text-align: center; color: red">No Data Available</td></tr>
+				{% endif %}
+	   </tbody></table>
+	   <hr />
+	  <p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
+		<p>back To <a href='/'>Home</a></p>
+	</body>
+</html>

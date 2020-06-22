@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Index</title>
+</head>
+<body>
+  <form method="post" action='/Compare'>
+  {% if eletronicvehicle %}
+  <p>Hello {{ eletronicvehicle }}</p>
+  <p> {{welcome}}</p>
+  To Insert EV information <a href="/add" >Insert EV</a>
+  {% else %}
+  <p>Hello guest welcome to the application</p>
+  {% endif %}
+  <p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
+  <!--<form mrthod="get" action='/'>
+    <input type="submit" value="Compare" name="button"/>
+  </form>-->
+<p style="color:red">After Insert Update Delete Please Reload Page To View Changes</p>
+  <hr />
+   <table border = "1"><thead><tr><th>ID</th><th>Email ID</th><th>Name</th><th>Manufacturer</th><th>Year</th><th>Bettery Size</th><th>Power</th><th>WLTP Range</th><th>Cost</th><th>Edit</th><th>Delete</th><th>Review</th></tr></thead><tbody>
+     {{list}}
+     {% for ev in showList %}
+       <tr><td>{{loop.index}} <input type="hidden" value="{{ev.key.id()}}" id="key_id" name="key_id" /><input type = "checkbox" name = "check_{{loop.index-1}}" id = "check_veh[]"  value = "{{ev.key.id()}}"></td><td>{{ev.email_address}}</td><td><a href='/Details?key={{ev.key.id()}}'>{{ev.name}}</a></td><td>{{ev.manufacturer}}</td><td>{{ev.year}}</td><td>{{ev.btrysize}}</td><td>{{ev.power}}</td><td>{{ev.wltprng}}</td><td>{{ev.cost}}</td>
+       {% if eletronicvehicle %}
+         <td><a href='/edit?key={{ev.key.id()}}'>Edit</a></td>
+         <td><a href='/delete?key={{ev.key.id()}}'>Delete</a></td>
+         <td><a href='/review?key={{ev.key.id()}}'>Add Review</a></td>
+       {% else %}
+         <td colspan="2">Please LogIn</td>
+         <td><a href='/review?key={{ev.key.id()}}'>View Review</a></td>
+       {% endif %}
+       </tr>
+     {% endfor %}
+   </tbody></table>
+   <hr />
+   <p>you can Search <a href='/search'>here</a></p>
+     <p>Select Checkbox to compare vehicle</p>
+     <input type="submit" value="Compare" name="button"/>
+   </form>
+</body>
+</html>
